@@ -23,10 +23,15 @@ class ToolbarItem extends React.Component {
     const { connectDragSource, data, onClick } = this.props;
     if (!connectDragSource) return null;
     return connectDragSource(
-      <li onClick={onClick} data-dismiss="modal">
+      <div
+        className="item"
+        onClick={onClick}
+        data-dismiss="modal"
+        title={data.name}
+      >
         <i className={data.icon}></i>
-        {data.name}
-      </li>
+        {this.props.showName && data.name}
+      </div>
     );
   }
 }

@@ -15,7 +15,6 @@ function ToolbarGroupItem(props) {
 
   const classShow = 'collapse' + (show ? ' show' : '');
   return (
-    <li>
       <div className="toolbar-group-item">
         <button className="btn btn-link btn-block text-left" type="button" onClick={onClick}>
           {name}
@@ -26,7 +25,6 @@ function ToolbarGroupItem(props) {
           </ul>
         </div>
       </div>
-    </li>
   );
 }
 

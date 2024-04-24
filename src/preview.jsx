@@ -4,7 +4,7 @@
 
 import React from 'react';
 import update from 'immutability-helper';
-// import { usePreview } from 'react-dnd-preview';
+import { usePreview } from 'react-dnd-preview';
 import store from './stores/store';
 import FormElementsEdit from './form-dynamic-edit';
 import SortableFormElements from './sortable-form-elements';
@@ -12,6 +12,18 @@ import CustomDragLayer from './form-elements/component-drag-layer';
 
 const { PlaceHolder } = SortableFormElements;
 
+const MyPreview = () => {
+  const preview = usePreview();
+  if (!preview.display) {
+    return null;
+  }
+  const { itemType, item, style } = preview;
+  return (
+    <div className="item-list__item" style={style}>
+      {itemType}
+    </div>
+  );
+};
 export default class Preview extends React.Component {
   state = {
     data: [],
@@ -55,19 +67,6 @@ export default class Preview extends React.Component {
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.editModeOff);
   }
-
-  // MyPreview() {
-  //   const preview = usePreview();
-  //   if (!preview.display) {
-  //     return null;
-  //   }
-  //   const { itemType, item, style } = preview;
-  //   return (
-  //     <div className="item-list__item" style={style}>
-  //       {itemType}
-  //     </div>
-  //   );
-  // };
 
   editModeOff = (e) => {
     if (this.editForm.current && !this.editForm.current.contains(e.target)) {
@@ -337,6 +336,7 @@ export default class Preview extends React.Component {
           insertCard={this.insertCard}
         />
         <CustomDragLayer />
+        <MyPreview />
       </div>
     );
   }
@@ -346,6 +346,6 @@ Preview.defaultProps = {
   files: [],
   editMode: false,
   editElement: null,
-  className: 'col-xs-12 col-md-9 react-form-builder-preview float-left',
+  className: 'col-12 react-form-builder-preview float-left',
   renderEditForm: props => <FormElementsEdit {...props} />,
 };

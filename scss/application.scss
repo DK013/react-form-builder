@@ -12,3 +12,81 @@
 // Form builder styles
 @import "form-builder";
 @import "form-builder-form";
+
+.flex {
+    display: flex;
+    
+    &.flex-column {
+        flex-direction: column;
+    }
+
+    &.flex-row {
+        flex-direction: row;
+    }
+
+    &.flex-wrap {
+        flex-wrap: wrap;
+    }
+
+    &.justify-center {
+        justify-content: center;
+    }
+
+    &.justify-space-between {
+        justify-content: space-between;
+    }
+
+    &.justify-space-around {
+        justify-content: space-around;
+    }
+
+    &.justify-end {
+        justify-content: flex-end;
+    }
+
+    &.items-center {
+        align-items: center;
+    }
+
+    &.items-start {
+        align-items: flex-start;
+    }
+
+    &.items-end {
+        align-items: flex-end;
+    }
+
+    &.items-baseline {
+        align-items: baseline;
+    }
+
+    &.items-stretch {
+        align-items: stretch;
+    }
+
+    &.self-center {
+        align-self: center;
+    }
+
+    &.self-start {
+        align-self: flex-start;
+    }
+
+    &.self-end {
+        align-self: flex-end;
+    }
+
+    &.self-baseline {
+        align-self: baseline;
+    }
+
+    &.self-stretch {
+        align-self: stretch;
+    }
+}
+
+.modal {
+    .modal-content {
+        padding: 0;
+    }
+}

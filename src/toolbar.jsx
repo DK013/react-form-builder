@@ -450,11 +450,11 @@ class Toolbar extends React.Component {
     store.dispatch('create', this.create(item));
   }
 
-  renderItem = (item) => (<ToolbarItem data={item} key={item.key} onClick={this._onClick.bind(this, item)} onCreate={this.create} />)
+  renderItem = (item) => (<ToolbarItem data={item} key={item.key} onClick={this._onClick.bind(this, item)} onCreate={this.create} showName={this.props.showName} />)
 
   render() {
     const { items, grouped, groupKeys } = buildGroupItems(this.state.items);
-    return (
+    return this.props.openInModal ? (
       <div
         className="modal fade"
         id="toolModal"
@@ -467,7 +467,7 @@ class Toolbar extends React.Component {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="toolModalLabel">
-                {this.props.intl.formatMessage({ id: 'toolbox' })}
+                {this.props.intl.formatMessage({ id: "toolbox" })}
               </h5>
               <button
                 type="button"
@@ -479,22 +479,32 @@ class Toolbar extends React.Component {
               </button>
             </div>
             <div className="modal-body">
-              <div className="col-xs-12 col-md-3 react-form-builder-toolbar float-right">
-                <ul>
-                  {items.map(this.renderItem)}
-                  {groupKeys.map((k) => (
-                    <ToolbarGroupItem
-                      key={k}
-                      name={k}
-                      group={grouped.get(k)}
-                      renderItem={this.renderItem}
-                    />
-                  ))}
-                </ul>
+              <div className="col-12 react-form-builder-toolbar float-right flex flex-wrap items-center justify-start">
+                {items.map(this.renderItem)}
+                {groupKeys.map((k) => (
+                  <ToolbarGroupItem
+                    key={k}
+                    name={k}
+                    group={grouped.get(k)}
+                    renderItem={this.renderItem}
+                  />
+                ))}
               </div>
             </div>
           </div>
         </div>
+      </div>
+    ) : (
+      <div className="col-12 react-form-builder-toolbar float-right flex flex-wrap items-center justify-start">
+        {items.map(this.renderItem)}
+        {groupKeys.map((k) => (
+          <ToolbarGroupItem
+            key={k}
+            name={k}
+            group={grouped.get(k)}
+            renderItem={this.renderItem}
+          />
+        ))}
       </div>
     );
   }

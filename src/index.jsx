@@ -5,6 +5,7 @@
 import React from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { TouchBackend } from "react-dnd-touch-backend";
 import { IntlProvider } from 'react-intl';
 import Preview from './preview';
 import Toolbar from './toolbar';
@@ -46,6 +47,8 @@ class ReactFormBuilder extends React.Component {
   render() {
     const toolbarProps = {
       showDescription: this.props.show_description,
+      openInModal: this.props.showInModal,
+      showName: this.props.showName,
     };
 
     const language = this.props.locale ? this.props.locale : 'en';
@@ -54,7 +57,7 @@ class ReactFormBuilder extends React.Component {
       toolbarProps.items = this.props.toolbarItems;
     }
     return (
-      <DndProvider backend={HTML5Backend}>
+      <DndProvider backend={TouchBackend}>
         <IntlProvider
           locale={currentAppLocale.locale}
           messages={currentAppLocale.messages}
@@ -69,7 +72,7 @@ class ReactFormBuilder extends React.Component {
               <Container />
             </div> */}
             <div className="react-form-builder clearfix">
-              <div style={{ width: '100vw' }}>
+              <div className="content">
                 <Toolbar
                   {...toolbarProps}
                   customItems={this.props.customToolbarItems}
