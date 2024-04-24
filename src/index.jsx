@@ -47,8 +47,8 @@ class ReactFormBuilder extends React.Component {
   render() {
     const toolbarProps = {
       showDescription: this.props.show_description,
-      openInModal: this.props.showInModal,
-      showName: this.props.showName,
+      openInModal: this.props.showInModal || true,
+      showName: this.props.showName || true,
     };
 
     const language = this.props.locale ? this.props.locale : 'en';
