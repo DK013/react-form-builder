@@ -1,6 +1,6 @@
 /**
-  * <ReactFormBuilder />
-*/
+ * <ReactFormBuilder />
+ */
 
 import React from 'react';
 import { DndProvider } from 'react-dnd';
@@ -50,23 +50,30 @@ class ReactFormBuilder extends React.Component {
 
     const language = this.props.locale ? this.props.locale : 'en';
     const currentAppLocale = AppLocale[language];
-    if (this.props.toolbarItems) { toolbarProps.items = this.props.toolbarItems; }
+    if (this.props.toolbarItems) {
+      toolbarProps.items = this.props.toolbarItems;
+    }
     return (
       <DndProvider backend={HTML5Backend}>
         <IntlProvider
           locale={currentAppLocale.locale}
-          messages={currentAppLocale.messages}>
+          messages={currentAppLocale.messages}
+        >
           <div>
             {/* <div>
-           <p>
-             It is easy to implement a sortable interface with React DnD. Just make
-             the same component both a drag source and a drop target, and reorder
-             the data in the <code>hover</code> handler.
-           </p>
-           <Container />
-         </div> */}
+              <p>
+                It is easy to implement a sortable interface with React DnD.
+                Just make the same component both a drag source and a drop
+                target, and reorder the data in the <code>hover</code> handler.
+              </p>
+              <Container />
+            </div> */}
             <div className="react-form-builder clearfix">
-              <div>
+              <div style={{ width: '100vw' }}>
+                <Toolbar
+                  {...toolbarProps}
+                  customItems={this.props.customToolbarItems}
+                />
                 <Preview
                   files={this.props.files}
                   manualEditModeOff={this.manualEditModeOff.bind(this)}
@@ -85,7 +92,6 @@ class ReactFormBuilder extends React.Component {
                   renderEditForm={this.props.renderEditForm}
                   saveAlways={this.props.saveAlways}
                 />
-                <Toolbar {...toolbarProps} customItems={this.props.customToolbarItems} />
               </div>
             </div>
           </div>
@@ -101,7 +107,8 @@ function ReactFormGenerator(props) {
   return (
     <IntlProvider
       locale={currentAppLocale.locale}
-      messages={currentAppLocale.messages}>
+      messages={currentAppLocale.messages}
+    >
       <FormGenerator {...props} />
     </IntlProvider>
   );
@@ -116,5 +123,8 @@ FormBuilders.Registry = Registry;
 export default FormBuilders;
 
 export {
-  ReactFormBuilder, ReactFormGenerator, store as ElementStore, Registry,
+  ReactFormBuilder,
+  ReactFormGenerator,
+  store as ElementStore,
+  Registry,
 };

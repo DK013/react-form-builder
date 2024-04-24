@@ -204,55 +204,55 @@ class Toolbar extends React.Component {
         icon: 'fas fa-bars',
         field_name: 'fieldset-element',
       },
-      {
-        key: 'TwoColumnRow',
-        canHaveAnswer: false,
-        name: intl.formatMessage({ id: 'two-columns-row' }),
-        label: '',
-        icon: 'fas fa-columns',
-        field_name: 'two_col_row_',
-      },
-      {
-        key: 'ThreeColumnRow',
-        canHaveAnswer: false,
-        name: intl.formatMessage({ id: 'three-columns-row' }),
-        label: '',
-        icon: 'fas fa-columns',
-        field_name: 'three_col_row_',
-      },
-      {
-        key: 'FourColumnRow',
-        element: 'MultiColumnRow',
-        canHaveAnswer: false,
-        name: intl.formatMessage({ id: 'four-columns-row' }),
-        label: '',
-        icon: 'fas fa-columns',
-        field_name: 'four_col_row_',
-        col_count: 4,
-        class_name: 'col-md-3',
-      },
-      {
-        key: 'FiveColumnRow',
-        element: 'MultiColumnRow',
-        canHaveAnswer: false,
-        name: intl.formatMessage({ id: 'five-columns-row' }),
-        label: '',
-        icon: 'fas fa-columns',
-        field_name: 'five_col_row_',
-        col_count: 5,
-        class_name: 'col',
-      },
-      {
-        key: 'SixColumnRow',
-        element: 'MultiColumnRow',
-        canHaveAnswer: false,
-        name: intl.formatMessage({ id: 'six-columns-row' }),
-        label: '',
-        icon: 'fas fa-columns',
-        field_name: 'six_col_row_',
-        col_count: 6,
-        class_name: 'col-md-2',
-      },
+      // {
+      //   key: 'TwoColumnRow',
+      //   canHaveAnswer: false,
+      //   name: intl.formatMessage({ id: 'two-columns-row' }),
+      //   label: '',
+      //   icon: 'fas fa-columns',
+      //   field_name: 'two_col_row_',
+      // },
+      // {
+      //   key: 'ThreeColumnRow',
+      //   canHaveAnswer: false,
+      //   name: intl.formatMessage({ id: 'three-columns-row' }),
+      //   label: '',
+      //   icon: 'fas fa-columns',
+      //   field_name: 'three_col_row_',
+      // },
+      // {
+      //   key: 'FourColumnRow',
+      //   element: 'MultiColumnRow',
+      //   canHaveAnswer: false,
+      //   name: intl.formatMessage({ id: 'four-columns-row' }),
+      //   label: '',
+      //   icon: 'fas fa-columns',
+      //   field_name: 'four_col_row_',
+      //   col_count: 4,
+      //   class_name: 'col-md-3',
+      // },
+      // {
+      //   key: 'FiveColumnRow',
+      //   element: 'MultiColumnRow',
+      //   canHaveAnswer: false,
+      //   name: intl.formatMessage({ id: 'five-columns-row' }),
+      //   label: '',
+      //   icon: 'fas fa-columns',
+      //   field_name: 'five_col_row_',
+      //   col_count: 5,
+      //   class_name: 'col',
+      // },
+      // {
+      //   key: 'SixColumnRow',
+      //   element: 'MultiColumnRow',
+      //   canHaveAnswer: false,
+      //   name: intl.formatMessage({ id: 'six-columns-row' }),
+      //   label: '',
+      //   icon: 'fas fa-columns',
+      //   field_name: 'six_col_row_',
+      //   col_count: 6,
+      //   class_name: 'col-md-2',
+      // },
       {
         key: 'Image',
         name: intl.formatMessage({ id: 'image' }),
@@ -341,7 +341,7 @@ class Toolbar extends React.Component {
 
   addCustomOptions(item, elementOptions) {
     if (item.type === 'custom') {
-      const customOptions = Object.assign({}, item, elementOptions);
+      const customOptions = { ...item, ...elementOptions };
       customOptions.custom = true;
       customOptions.component = item.component || null;
       customOptions.custom_options = item.custom_options || [];
@@ -455,16 +455,46 @@ class Toolbar extends React.Component {
   render() {
     const { items, grouped, groupKeys } = buildGroupItems(this.state.items);
     return (
-      <div className="col-md-3 react-form-builder-toolbar float-right">
-        <h4>{this.props.intl.formatMessage({ id: 'toolbox' })}</h4>
-        <ul>
-          {
-            items.map(this.renderItem)
-          }
-          {
-            groupKeys.map(k => <ToolbarGroupItem key={k} name={k} group={grouped.get(k)} renderItem={this.renderItem} />)
-          }
-        </ul>
+      <div
+        className="modal fade"
+        id="toolModal"
+        tabIndex="-1"
+        role="dialog"
+        aria-labelledby="toolModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="toolModalLabel">
+                {this.props.intl.formatMessage({ id: 'toolbox' })}
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <div className="col-xs-12 col-md-3 react-form-builder-toolbar float-right">
+                <ul>
+                  {items.map(this.renderItem)}
+                  {groupKeys.map((k) => (
+                    <ToolbarGroupItem
+                      key={k}
+                      name={k}
+                      group={grouped.get(k)}
+                      renderItem={this.renderItem}
+                    />
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

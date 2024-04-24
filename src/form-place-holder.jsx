@@ -11,10 +11,13 @@ class PlaceHolder extends React.Component {
     const placeHolderClass = this.props.show ? PLACE_HOLDER : PLACE_HOLDER_HIDDEN;
     // eslint-disable-next-line no-nested-ternary
     const placeHolder = this.props.show ?
-          (this.props.text === 'Dropzone' ? intl.formatMessage({ id: 'drop-zone' }) : this.props.text) : '';
+          (this.props.text === 'Tap to add' ? intl.formatMessage({ id: 'tap-to-add' }) : this.props.text) : '';
 
     return (
-      <div className={placeHolderClass} >
+      <div
+        className={placeHolderClass}
+        onClick={() => { $('#toolModal').modal(); }}
+      >
         <div>{placeHolder}</div>
       </div>
     );
@@ -28,6 +31,6 @@ PlaceHolder.propTypes = {
 };
 
 PlaceHolder.defaultProps = {
-  text: 'Dropzone',
+  text: 'Tap to add',
   show: false,
 };
