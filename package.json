@@ -42,6 +42,7 @@
   "dependencies": {
     "beedle": "^0.8.1",
     "classnames": "^2.2.6",
+    "cross-env": "^7.0.3",
     "date-fns": "^2.16.1",
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.8.4",
@@ -103,7 +104,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
-    "build": "webpack --mode production --config webpack.production.config.js",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider && webpack --mode production --config webpack.production.config.js",
     "build:dev": "webpack --mode development",
     "build:umd": "webpack --mode development --config webpack.production.config.js",
     "build:style": "sass ./scss/application.scss dist/app.css --style compressed",
@@ -111,7 +112,7 @@
     "build:dist": "npm run build && npm run copy:dist",
     "clean": "rimraf dist",
     "copy:dist": "copyfiles -f \"./dist/*\" \"./public/dist\"",
-    "prepublishOnly": "npm run clean && NODE_OPTIONS=--openssl-legacy-provider npm run build:lib && NODE_OPTIONS=--openssl-legacy-provider npm run build",
+    "prepublishOnly": "npm run clean && cross-env NODE_OPTIONS=--openssl-legacy-provider npm run build:lib && cross-env NODE_OPTIONS=--openssl-legacy-provider npm run build",
     "watch": "webpack --watch",
     "start": "webpack-dev-server --hot --mode development",
     "serve:api": "node server/index.js",
