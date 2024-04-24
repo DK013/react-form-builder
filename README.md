@@ -23,6 +23,10 @@ A complete react form builder that interfaces with a json endpoint to load and s
 
 # Basic Usage
 
+```shell
+npm i https://github.com/DK013/react-form-builder
+```
+
 ```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
