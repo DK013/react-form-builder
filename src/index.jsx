@@ -14,6 +14,10 @@ import store from './stores/store';
 import Registry from './stores/registry';
 import AppLocale from './language-provider';
 import "bootstrap";
+import "@fortawesome/fontawesome-free/js/fontawesome";
+import "@fortawesome/fontawesome-free/js/solid";
+import "@fortawesome/fontawesome-free/js/regular";
+import "@fortawesome/fontawesome-free/js/brands";
 
 class ReactFormBuilder extends React.Component {
   constructor(props) {
