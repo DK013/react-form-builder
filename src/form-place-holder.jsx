@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
+import jquery from "jquery";
 
 const PLACE_HOLDER = 'form-place-holder';
 const PLACE_HOLDER_HIDDEN = 'form-place-holder-hidden';
@@ -16,7 +17,7 @@ class PlaceHolder extends React.Component {
     return (
       <div
         className={placeHolderClass}
-        onClick={() => { $('#toolModal').modal(); }}
+        onClick={() => { jquery("#toolModal").modal(); }}
       >
         <div>{placeHolder}</div>
       </div>
