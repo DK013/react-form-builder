@@ -193,8 +193,8 @@ export default class FormElementsEdit extends React.Component {
     return (
       <div>
         <div className="clearfix">
-          <h4 className="float-left">{this.props.element.text}</h4>
-          <div style={{padding: "5px"}}
+          <h4 className="float-left" style={{marginTop: "10px"}}>{this.props.element.text}</h4>
+          <div 
             onClick={() => {
               console.log("manualEditModeOff", this.props);
               this.props.manualEditModeOff();
