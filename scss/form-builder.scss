@@ -147,9 +147,9 @@
               float: left;
               margin-right: 5px;
             }
-            .dynamic-options-actions-buttons {
-              margin-left: 20px;
-            }
+            // .dynamic-options-actions-buttons {
+            //   margin-left: 20px;
+            // }
           }
         }
       }
@@ -207,7 +207,7 @@
           border: 2px #ccc dashed;
         }
         .toolbar-header {
-          opacity: 0; // visible
+          opacity: 1; // visible
           z-index: 100;
           position: relative;
           .label {
