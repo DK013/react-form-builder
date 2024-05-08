@@ -84,11 +84,12 @@
          <ul>
            <li>
              <div className="row">
-               <div className="col-6"><b><IntlMessages id='options' /></b></div>
+               <div className="col-5" style={{ paddingRight: 0 }}><b><IntlMessages id='options' /></b></div>
                { this.props.canHaveOptionValue &&
-               <div className="col"><b><IntlMessages id='value' /></b></div> }
+               <div className="col" style={{flexGrow: 0}}><b><IntlMessages id='value' /></b></div> }
                { this.props.canHaveOptionValue && this.props.canHaveOptionCorrect &&
-               <div className="col"><b><IntlMessages id='correct' /></b></div> }
+                 <div className="col" style={{flexGrow: 0}}><b><IntlMessages id='correct' /></b></div>}
+               <div className="col"><b style={{opacity: 0}}><IntlMessages id='correct' /></b></div>
              </div>
            </li>
            {
@@ -98,16 +99,16 @@
                return (
                  <li className="clearfix" key={this_key}>
                    <div className="row">
-                     <div className="col-6">
+                     <div className="col-5" style={{ paddingRight: 0 }}>
                        <input tabIndex={index + 1} className="form-control" style={{ width: '100%' }} type="text" name={`text_${index}`} placeholder="Option text" value={option.text} onBlur={this.updateOption.bind(this)} onChange={this.editOption.bind(this, index)} />
                      </div>
                      { this.props.canHaveOptionValue &&
-                     <div className="col">
+                     <div className="col" style={{ paddingRight: 0 }}>
                        <input className="form-control" type="text" name={`value_${index}`} value={val} onChange={this.editValue.bind(this, index)} />
                      </div> }
                      { this.props.canHaveOptionValue && this.props.canHaveOptionCorrect &&
-                     <div className="col">
-                       <input className="form-control" type="checkbox" value="1" onChange={this.editOptionCorrect.bind(this, index)} checked={option.hasOwnProperty('correct')} />
+                     <div className="col" style={{flexGrow: 0}}>
+                         <input className="form-control" type="checkbox" value="1" onChange={this.editOptionCorrect.bind(this, index)} checked={option.hasOwnProperty('correct')} />
                      </div> }
                      <div className="col-3">
                        <div className="dynamic-options-actions-buttons">
