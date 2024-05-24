@@ -120,8 +120,8 @@ class DatePicker extends React.Component {
                      value={this.state.value}
                      className="form-control" />
             }
-            { iOS && !readOnly &&
-              <input type="date"
+            { !readOnly &&
+              <input type={showTimeSelect ? 'datetime-local' : 'date'}
                      name={props.name}
                      ref={props.ref}
                      onChange={this.handleChange}
@@ -129,7 +129,7 @@ class DatePicker extends React.Component {
                      value={this.state.value}
                      className = "form-control" />
             }
-            { !iOS && !readOnly &&
+            {/* { !iOS && !readOnly &&
               <ReactDatePicker
                 name={props.name}
                 ref={props.ref}
@@ -145,7 +145,7 @@ class DatePicker extends React.Component {
                 portalId="root-portal"
                 autoComplete="off"
                 placeholderText={placeholderText} />
-            }
+            } */}
           </div>
         </div>
       </div>
