@@ -56,6 +56,7 @@ class DatePicker extends React.Component {
       value = props.defaultValue;
 
       if (value === '' || value === undefined) {
+        value = '';
         internalValue = undefined;
       } else {
         internalValue = parse(value, state.formatMask, new Date());
@@ -90,7 +91,8 @@ class DatePicker extends React.Component {
   render() {
     const { showTimeSelect, showTimeSelectOnly, showTimeInput } = this.props.data;
     const props = {};
-    props.type = 'date';
+    // eslint-disable-next-line no-nested-ternary
+    props.type = showTimeSelect ? 'datetime-local' : showTimeSelectOnly ? 'time' : 'date';
     props.className = 'form-control';
     props.name = this.props.data.field_name;
     const readOnly = this.props.data.readOnly || this.props.read_only;
@@ -113,21 +115,27 @@ class DatePicker extends React.Component {
           <div>
             { readOnly &&
               <input type="text"
-                     name={props.name}
-                     ref={props.ref}
-                     readOnly={readOnly}
-                     placeholder={this.state.placeholder}
-                     value={this.state.value}
-                     className="form-control" />
+                    name={props.name}
+                    ref={props.ref}
+                    readOnly={readOnly}
+                    placeholder={this.state.placeholder}
+                    value={this.state.value}
+                    className="form-control" />
             }
             { !readOnly &&
-              <input type={showTimeSelect ? 'datetime-local' : 'date'}
-                     name={props.name}
-                     ref={props.ref}
-                     onChange={this.handleChange}
-                     dateFormat="MM/DD/YYYY"
-                     value={this.state.value}
-                     className = "form-control" />
+              // eslint-disable-next-line no-nested-ternary
+              <input type={props.type}
+                    name={props.name}
+                    ref={props.ref}
+                    onChange={(e) => {
+                      this.setState({
+                        value: e.target.value,
+                        internalValue: e.target.value,
+                      });
+                    }}
+                    dateFormat="MM/DD/YYYY"
+                    value={this.state.value}
+                    className = "form-control" />
             }
             {/* { !iOS && !readOnly &&
               <ReactDatePicker
