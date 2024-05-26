@@ -128,7 +128,7 @@ class DatePicker extends React.Component {
                     name={props.name}
                     ref={props.ref}
                     onChange={(e) => {
-                      if (showTimeSelect && showTimeSelectOnly) {
+                      if (showTimeSelect && !showTimeSelectOnly) {
                         this.handleChange(e);
                       } else {
                         this.setState({
