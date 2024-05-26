@@ -127,6 +127,7 @@ class DatePicker extends React.Component {
               <input type={props.type}
                     name={props.name}
                     ref={props.ref}
+                    placeholder={this.state.placeholder}
                     onChange={(e) => {
                       this.setState({
                           value: e.target.value,
