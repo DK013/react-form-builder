@@ -92,7 +92,7 @@ class DatePicker extends React.Component {
     const { showTimeSelect, showTimeSelectOnly, showTimeInput } = this.props.data;
     const props = {};
     // eslint-disable-next-line no-nested-ternary
-    props.type = showTimeSelect ? 'datetime-local' : showTimeSelectOnly ? 'time' : 'date';
+    props.type = showTimeSelect ? showTimeSelectOnly ? 'time' : 'datetime-local' : 'date';
     props.className = 'form-control';
     props.name = this.props.data.field_name;
     const readOnly = this.props.data.readOnly || this.props.read_only;
@@ -128,10 +128,14 @@ class DatePicker extends React.Component {
                     name={props.name}
                     ref={props.ref}
                     onChange={(e) => {
-                      this.setState({
-                        value: e.target.value,
-                        internalValue: e.target.value,
-                      });
+                      if (showTimeSelect && showTimeSelectOnly) {
+                        this.handleChange(e);
+                      } else {
+                        this.setState({
+                          value: e.target.value,
+                          internalValue: e.target.value,
+                        });
+                      }
                     }}
                     dateFormat="MM/DD/YYYY"
                     value={this.state.value}
