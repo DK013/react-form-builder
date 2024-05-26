@@ -97,7 +97,8 @@ class DatePicker extends React.Component {
     props.name = this.props.data.field_name;
     const readOnly = this.props.data.readOnly || this.props.read_only;
     const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    const placeholderText = this.state.formatMask.toLowerCase();
+    // eslint-disable-next-line no-nested-ternary
+    const placeholderText = showTimeSelect ? showTimeSelectOnly ? 'hh:mm aa' : 'mm/dd/yyyy hh:mm aa' : 'mm/dd/yyyy';
 
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
