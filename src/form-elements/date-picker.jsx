@@ -57,7 +57,7 @@ class DatePicker extends React.Component {
 
       if (value === '' || value === undefined) {
         value = '';
-        internalValue = undefined;
+        internalValue = '';
       } else {
         internalValue = parse(value, state.formatMask, new Date());
       }
@@ -79,14 +79,14 @@ class DatePicker extends React.Component {
   //   }
   // }
 
-  static getDerivedStateFromProps(props, state) {
-    const { updated, formatMask } = DatePicker.updateFormat(props, state.formatMask);
-    if ((props.data.defaultToday !== state.defaultToday) || updated) {
-      const newState = DatePicker.updateDateTime(props, state, formatMask);
-      return newState;
-    }
-    return null;
-  }
+  // static getDerivedStateFromProps(props, state) {
+  //   const { updated, formatMask } = DatePicker.updateFormat(props, state.formatMask);
+  //   if ((props.data.defaultToday !== state.defaultToday) || updated) {
+  //     const newState = DatePicker.updateDateTime(props, state, formatMask);
+  //     return newState;
+  //   }
+  //   return null;
+  // }
 
   render() {
     const { showTimeSelect, showTimeSelectOnly, showTimeInput } = this.props.data;
@@ -128,16 +128,11 @@ class DatePicker extends React.Component {
                     name={props.name}
                     ref={props.ref}
                     onChange={(e) => {
-                      if (showTimeSelect && !showTimeSelectOnly) {
-                        this.handleChange(e);
-                      } else {
-                        this.setState({
+                      this.setState({
                           value: e.target.value,
                           internalValue: e.target.value,
-                        });
-                      }
+                      });
                     }}
-                    dateFormat="MM/DD/YYYY"
                     value={this.state.value}
                     className = "form-control" />
             }
